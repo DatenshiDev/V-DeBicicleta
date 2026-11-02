@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SCB – Mockup do app (Sprint 1)</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1456d9;--blue-d:#0d3fa8;--blue-l:#e8f0ff;--bg:#fff;--page:#eef3fc;--ink:#0f1b33;--mut:#5b6b88;--line:#d5deef;--err:#c62828;--ok:#1b7f4b;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a33;--page:#08101f;--ink:#eef3ff;--mut:#9fb0d0;--line:#243558;--blue-l:#17294f;--blue:#4d8bff;--blue-d:#6b9fff;--on:#06122b;--err:#ff8a80;--ok:#6fdc9f}}
+:root[data-theme="dark"]{--bg:#0e1a33;--page:#08101f;--ink:#eef3ff;--mut:#9fb0d0;--line:#243558;--blue-l:#17294f;--blue:#4d8bff;--blue-d:#6b9fff;--on:#06122b;--err:#ff8a80;--ok:#6fdc9f}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:Figtree,system-ui,sans-serif;background:var(--page);color:var(--ink);min-height:100vh;display:flex;gap:40px;align-items:center;justify-content:center;padding:24px;flex-wrap:wrap}
+.side{max-width:280px}
+.side h1{font-size:22px;margin:0 0 6px;font-weight:800}
+.side p{color:var(--mut);font-size:14px;line-height:1.5;margin:0 0 16px}
+.side button{display:block;width:100%;text-align:left;margin-bottom:8px;padding:10px 14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font:600 14px Figtree,sans-serif;cursor:pointer}
+.side button:hover,.side button.on{border-color:var(--blue);background:var(--blue-l)}
+.side label{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--mut);margin-top:12px}
+.phone{width:375px;height:760px;max-width:100%;background:var(--bg);border-radius:38px;border:10px solid #0b1530;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(13,63,168,.25)}
+.status{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:600;color:var(--mut);flex:none}
+.screen{display:none;flex:1;flex-direction:column;overflow-y:auto;padding:8px 22px 22px}
+.screen.on{display:flex}
+.hero{background:var(--blue);color:#fff;border-radius:0 0 28px 28px;margin:0 -22px 22px;padding:26px 22px 30px}
+.hero .logo{width:44px;height:44px;border-radius:14px;background:#fff;color:var(--blue);display:grid;place-items:center;margin-bottom:14px}
+.hero h2{margin:0;font-size:26px;font-weight:800;letter-spacing:-.3px}
+.hero p{margin:4px 0 0;opacity:.9;font-size:14px}
+h3{font-size:22px;margin:6px 0 4px;font-weight:800}
+.sub{color:var(--mut);font-size:14px;margin:0 0 16px}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.f input,.f select{width:100%;height:46px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:0 14px;font:500 15px Figtree,sans-serif}
+.f input:focus,.f select:focus,button:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 40%,transparent);border-color:var(--blue)}
+.f.bad input,.f.bad select,.f.bad .photo{border-color:var(--err)}
+.msg{display:none;color:var(--err);font-size:12.5px;margin-top:4px}
+.f.bad .msg{display:block}
+.btn{height:50px;border:0;border-radius:14px;background:var(--blue);color:var(--on);font:700 16px Figtree,sans-serif;cursor:pointer;width:100%;margin-top:6px}
+.btn:active{background:var(--blue-d)}
+.btn.sec{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+.link{background:none;border:0;color:var(--blue);font:600 14px Figtree,sans-serif;cursor:pointer;padding:10px;margin:auto}
+.pw{position:relative}.pw button{position:absolute;right:6px;top:5px;height:36px;border:0;background:none;color:var(--blue);font:600 13px Figtree,sans-serif;cursor:pointer}
+.photo{border:1.5px dashed var(--line);border-radius:12px;height:96px;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--mut);font-size:14px;cursor:pointer;overflow:hidden;background:var(--blue-l)}
+.photo img{height:100%;width:100%;object-fit:cover}
+.alert{display:none;background:color-mix(in srgb,var(--err) 12%,var(--bg));border:1px solid var(--err);color:var(--err);border-radius:12px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
+.alert.on{display:block}
+.menu{display:grid;gap:12px;margin-top:6px}
+.item{display:flex;align-items:center;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:16px;background:var(--bg);color:var(--ink);font:700 16px Figtree,sans-serif;text-align:left;cursor:pointer;width:100%}
+.item i{width:42px;height:42px;border-radius:12px;background:var(--blue-l);color:var(--blue);display:grid;place-items:center;flex:none}
+.item small{display:block;font-weight:500;color:var(--mut);font-size:12.5px;margin-top:2px}
+.item[disabled]{opacity:.55;cursor:not-allowed}
+.item:not([disabled]):hover{border-color:var(--blue)}
+.toast{position:absolute;left:18px;right:18px;bottom:20px;background:var(--ink);color:var(--bg);padding:13px 16px;border-radius:14px;font-size:14px;font-weight:600;opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{flex:1;height:44px;border:0;background:var(--bg);color:var(--mut);font:600 14px Figtree,sans-serif;cursor:pointer}
+.seg button.on{background:var(--blue);color:var(--on)}
+.cc{background:var(--blue);color:#fff;border-radius:18px;height:172px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;margin-bottom:16px}
+.cc b{font-size:15px;font-weight:700}.cc .num{font-size:20px;font-weight:600;letter-spacing:2px}.cc .bot{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;gap:8px}
+svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:480px){body{padding:0}.phone{border:0;border-radius:0;height:100vh;width:100%}.side{padding:16px}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<aside class="side">
+  <h1>App SCB · Sprint 1</h1>
+  <p>Mockup interativo do app da VáDeBicicleta. Teste o fluxo ou pule direto para uma tela. Conta de teste: <b>maria@scb.com</b> / <b>senha1234</b>.</p>
+  <button data-go="login">US02 · Login</button>
+  <button data-go="cadastro">US01 · Cadastro</button>
+  <button data-go="home">US03 · Tela inicial</button>
+  <button data-go="dados">US04 · Alterar dados</button>
+  <button data-go="cartao">US05 · Cartão de crédito</button>
+  <label><input type="checkbox" id="offline"> Simular falta de conexão (T12)</label>
+</aside>
+
+<main class="phone" aria-label="Aplicativo SCB">
+  <div class="status"><span>9:41</span><span>SCB</span></div>
+
+  <section class="screen on" id="login">
+    <div class="hero">
+      <div class="logo"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17 9 8h5l4.5 9M9 8 12 17M13 5h3"/></svg></div>
+      <h2>VáDeBicicleta</h2><p>Retire em um totem, devolva em qualquer vaga.</p>
+    </div>
+    <h3>Entrar</h3><p class="sub">Acesse sua conta de ciclista.</p>
+    <div class="alert" id="loginErr" role="alert"></div>
+    <div class="f" id="fl-email"><label for="l-email">E-mail</label><input id="l-email" type="email" autocomplete="username"><div class="msg">Informe o e-mail.</div></div>
+    <div class="f" id="fl-pass"><label for="l-pass">Senha</label><div class="pw"><input id="l-pass" type="password" autocomplete="current-password"><button type="button" data-eye="l-pass">Mostrar</button></div><div class="msg">Informe a senha.</div></div>
+    <button class="btn" id="btnLogin">Entrar</button>
+    <button class="link" data-go="cadastro">Criar conta</button>
+  </section>
+
+  <section class="screen" id="cadastro">
+    <h3>Criar conta</h3><p class="sub">Todos os campos são obrigatórios.</p>
+    <div class="f" id="fc-nome"><label for="c-nome">Nome completo</label><input id="c-nome" autocomplete="name"><div class="msg">Informe seu nome.</div></div>
+    <div class="f"><label>Nacionalidade</label><div class="seg" id="nac"><button type="button" class="on" data-n="br">Brasileiro</button><button type="button" data-n="es">Estrangeiro</button></div></div>
+    <div class="f" id="fc-doc"><label for="c-doc" id="docLbl">CPF</label><input id="c-doc" inputmode="numeric" placeholder="000.000.000-00"><div class="msg" id="docMsg">CPF inválido.</div></div>
+    <div class="f" id="fc-foto"><label>Foto do documento</label>
+      <div class="photo" id="photo" tabindex="0" role="button"><span id="photoTxt">Tocar para tirar foto ou escolher da galeria</span></div>
+      <input type="file" id="file" accept="image/*" hidden>
+      <div class="msg">Anexe a foto do documento.</div></div>
+    <div class="f" id="fc-email"><label for="c-email">E-mail</label><input id="c-email" type="email" autocomplete="email"><div class="msg">Informe um e-mail válido.</div></div>
+    <div class="f" id="fc-pass"><label for="c-pass">Senha</label><div class="pw"><input id="c-pass" type="password" autocomplete="new-password"><button type="button" data-eye="c-pass">Mostrar</button></div><div class="msg">Use no mínimo 8 caracteres.</div></div>
+    <button class="btn" id="btnCad">Criar conta</button>
+    <button class="link" data-go="login">Já tenho conta</button>
+  </section>
+
+  <section class="screen" id="home">
+    <div class="hero">
+      <p>Bom te ver de volta</p>
+      <h2 id="greet">Olá, Maria</h2>
+    </div>
+    <div class="menu">
+      <button class="item" disabled><i><svg viewBox="0 0 24 24"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17 9 8h5l4.5 9M9 8 12 17"/></svg></i><span>Alugar bicicleta<small>Disponível na Sprint 2</small></span></button>
+      <button class="item" data-go="dados"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></i><span>Meus dados<small>Nome, e-mail e documento</small></span></button>
+      <button class="item" data-go="cartao"><i><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg></i><span>Cartão de crédito<small id="cardSub">Cadastre para alugar</small></span></button>
+      <button class="item" id="btnSair"><i><svg viewBox="0 0 24 24"><path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/></svg></i><span>Sair</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="dados">
+    <h3>Meus dados</h3><p class="sub">Atualize suas informações cadastrais.</p>
+    <div class="f" id="fd-nome"><label for="d-nome">Nome completo</label><input id="d-nome"><div class="msg">Informe seu nome.</div></div>
+    <div class="f" id="fd-email"><label for="d-email">E-mail</label><input id="d-email" type="email"><div class="msg">Informe um e-mail válido.</div></div>
+    <div class="f" id="fd-doc"><label for="d-doc">Número do documento</label><input id="d-doc"><div class="msg">Documento inválido.</div></div>
+    <div class="f" id="fd-foto"><label>Foto do documento</label><div class="photo" id="photoD" tabindex="0" role="button"></div><input type="file" id="fileD" accept="image/*" hidden><div class="msg">Anexe a foto do documento.</div></div>
+    <button class="btn" id="btnSalvar">Salvar alterações</button>
+    <button class="btn sec" id="btnCancel">Cancelar</button>
+  </section>
+
+  <section class="screen" id="cartao">
+    <h3>Cartão de crédito</h3><p class="sub">Usado para cobrar a taxa básica de 2 horas. Você pode trocar a qualquer momento.</p>
+    <div class="cc" aria-hidden="true"><b id="ccBrand">Cartão</b><div class="num" id="ccNum">•••• •••• •••• ••••</div><div class="bot"><span id="ccName">NOME NO CARTÃO</span><span id="ccExp">MM/AA</span></div></div>
+    <div class="f" id="fk-num"><label for="k-num">Número do cartão</label><input id="k-num" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000"><div class="msg">Número de cartão inválido.</div></div>
+    <div class="f" id="fk-nome"><label for="k-nome">Nome impresso no cartão</label><input id="k-nome" autocomplete="cc-name"><div class="msg">Informe o nome como está no cartão.</div></div>
+    <div class="row">
+      <div class="f" id="fk-val"><label for="k-val">Validade</label><input id="k-val" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA"><div class="msg">Validade inválida ou vencida.</div></div>
+      <div class="f" id="fk-cvv"><label for="k-cvv">CVV</label><input id="k-cvv" inputmode="numeric" autocomplete="cc-csc" type="password" maxlength="4" placeholder="000"><div class="msg">Informe 3 ou 4 dígitos.</div></div>
+    </div>
+    <p class="sub" style="font-size:12.5px;margin:0 0 6px">O app guarda apenas os 4 últimos dígitos. O número completo não é armazenado.</p>
+    <button class="btn" id="btnCartao">Salvar cartão</button>
+    <button class="btn sec" id="btnCartaoVoltar">Voltar</button>
+  </section>
+
+  <div class="toast" id="toast" role="status"></div>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const sample='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120"><rect width="200" height="120" fill="#cfe0ff"/><rect x="14" y="20" width="50" height="64" rx="6" fill="#1456d9"/><rect x="78" y="28" width="104" height="10" rx="5" fill="#1456d9"/><rect x="78" y="50" width="80" height="10" rx="5" fill="#6b9fff"/><rect x="78" y="72" width="92" height="10" rx="5" fill="#6b9fff"/></svg>');
+let user={nome:'Maria Souza',email:'maria@scb.com',senha:'senha1234',nac:'br',doc:'52998224725',foto:sample};
+let card=null;
+let nac='br',fotoCad=null,fotoDad=null,tt;
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));document.querySelectorAll('.side button[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
+  if(id==='home'){$('greet').textContent='Olá, '+user.nome.split(' ')[0];$('cardSub').textContent=card?card.brand+' final '+card.last4:'Cadastre para alugar'}
+  if(id==='cartao'){['k-num','k-nome','k-val','k-cvv'].forEach(i=>$(i).value='');clearBad();ccPrev()}
+  if(id==='dados'){$('d-nome').value=user.nome;$('d-email').value=user.email;$('d-doc').value=fmtDoc(user.doc,user.nac);fotoDad=user.foto;setPhoto($('photoD'),fotoDad);clearBad()}
+  if(id==='login'){$('loginErr').classList.remove('on');$('l-pass').value=''}
+  document.querySelector('.screen.on').scrollTop=0}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2600)}
+function bad(id,on){$(id).classList.toggle('bad',on);return on}
+function clearBad(){document.querySelectorAll('.f.bad').forEach(f=>f.classList.remove('bad'))}
+function cpfOk(v){v=v.replace(/\D/g,'');if(v.length!==11||/^(\d)\1+$/.test(v))return false;for(let t=9;t<11;t++){let s=0;for(let i=0;i<t;i++)s+=v[i]*(t+1-i);if((s*10%11)%10!=v[t])return false}return true}
+function docOk(v,n){return n==='br'?cpfOk(v):/^[A-Za-z0-9]{6,9}$/.test(v.trim())}
+function fmtDoc(v,n){if(n!=='br')return v;v=v.replace(/\D/g,'').slice(0,11);return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
+const mailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function setPhoto(box,src){box.innerHTML=src?'<img alt="Foto do documento" src="'+src+'">':'<span>Tocar para tirar foto ou escolher da galeria</span>'}
+function pick(box,input,cb){box.onclick=()=>input.click();box.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click()}};
+  input.onchange=()=>{const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{cb(r.result);setPhoto(box,r.result)};r.readAsDataURL(f)}}
+pick($('photo'),$('file'),s=>{fotoCad=s;bad('fc-foto',false)});
+pick($('photoD'),$('fileD'),s=>{fotoDad=s;bad('fd-foto',false)});
+
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+document.querySelectorAll('[data-eye]').forEach(b=>b.addEventListener('click',()=>{const i=$(b.dataset.eye);const h=i.type==='password';i.type=h?'text':'password';b.textContent=h?'Ocultar':'Mostrar'}));
+document.querySelectorAll('#nac button').forEach(b=>b.addEventListener('click',()=>{nac=b.dataset.n;document.querySelectorAll('#nac button').forEach(x=>x.classList.toggle('on',x===b));
+  $('docLbl').textContent=nac==='br'?'CPF':'Número do passaporte';$('c-doc').placeholder=nac==='br'?'000.000.000-00':'Ex.: AB123456';$('docMsg').textContent=nac==='br'?'CPF inválido.':'Informe um passaporte válido.';$('c-doc').value='';bad('fc-doc',false)}));
+$('c-doc').addEventListener('input',e=>{if(nac==='br')e.target.value=fmtDoc(e.target.value,'br')});
+
+$('btnLogin').onclick=()=>{const e=$('l-email').value.trim(),p=$('l-pass').value;const a=bad('fl-email',!e),b=bad('fl-pass',!p);const box=$('loginErr');box.classList.remove('on');if(a||b)return;
+  if($('offline').checked){box.textContent='Não foi possível entrar agora. Tente novamente.';box.classList.add('on');return}
+  if(e.toLowerCase()===user.email&&p===user.senha){$('l-email').value='';go('home')}else{box.textContent='E-mail ou senha incorretos.';box.classList.add('on')}};
+$('btnCad').onclick=()=>{const n=$('c-nome').value.trim(),d=$('c-doc').value,e=$('c-email').value.trim(),p=$('c-pass').value;
+  const r=[bad('fc-nome',!n),bad('fc-doc',!docOk(d,nac)),bad('fc-foto',!fotoCad),bad('fc-email',!mailOk(e)),bad('fc-pass',p.length<8)];if(r.some(Boolean))return;
+  user={nome:n,email:e.toLowerCase(),senha:p,nac,doc:d.replace(/\D/g,'')||d.trim(),foto:fotoCad};
+  ['c-nome','c-doc','c-email','c-pass'].forEach(i=>$(i).value='');fotoCad=null;setPhoto($('photo'),null);go('login');$('l-email').value=user.email;toast('Conta criada. Entre para continuar.')};
+$('btnSalvar').onclick=()=>{const n=$('d-nome').value.trim(),e=$('d-email').value.trim(),d=$('d-doc').value;
+  const r=[bad('fd-nome',!n),bad('fd-email',!mailOk(e)),bad('fd-doc',!docOk(d,user.nac)),bad('fd-foto',!fotoDad)];if(r.some(Boolean))return;
+  user={...user,nome:n,email:e.toLowerCase(),doc:user.nac==='br'?d.replace(/\D/g,''):d.trim(),foto:fotoDad};go('home');toast('Dados atualizados.')};
+$('btnCancel').onclick=()=>go('home');
+
+/* US05 – Cartão de crédito */
+function luhn(n){let s=0,d=false;for(let i=n.length-1;i>=0;i--){let x=+n[i];if(d){x*=2;if(x>9)x-=9}s+=x;d=!d}return s%10===0}
+function brandOf(n){return /^4/.test(n)?'Visa':/^(5[1-5]|2[2-7])/.test(n)?'Mastercard':/^3[47]/.test(n)?'Amex':/^(4011|4312|4389|4514|4576|5041|5067|509|6277|6362|6363|650|6516|6550)/.test(n)?'Elo':'Cartão'}
+function expOk(v){const m=/^(\d{2})\/(\d{2})$/.exec(v);if(!m)return false;const mm=+m[1],yy=2000+ +m[2],now=new Date();return mm>=1&&mm<=12&&(yy>now.getFullYear()||(yy===now.getFullYear()&&mm>=now.getMonth()+1))}
+function ccPrev(){const n=$('k-num').value.replace(/\D/g,'');
+  if(!n&&!$('k-nome').value&&!$('k-val').value&&card){$('ccBrand').textContent=card.brand;$('ccNum').textContent='•••• •••• •••• '+card.last4;$('ccName').textContent=card.nome;$('ccExp').textContent=card.exp;return}
+  $('ccBrand').textContent=brandOf(n);$('ccNum').textContent=(n.padEnd(16,'•').match(/.{1,4}/g)||[]).join(' ');
+  $('ccName').textContent=$('k-nome').value.toUpperCase()||'NOME NO CARTÃO';$('ccExp').textContent=$('k-val').value||'MM/AA'}
+$('k-num').addEventListener('input',e=>{const n=e.target.value.replace(/\D/g,'').slice(0,16);e.target.value=n.replace(/(.{4})/g,'$1 ').trim();ccPrev()});
+$('k-val').addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,4);if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);e.target.value=v;ccPrev()});
+$('k-cvv').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4)});
+$('k-nome').addEventListener('input',ccPrev);
+$('btnCartao').onclick=()=>{const n=$('k-num').value.replace(/\D/g,''),nm=$('k-nome').value.trim(),v=$('k-val').value,c=$('k-cvv').value;
+  const r=[bad('fk-num',n.length<13||!luhn(n)),bad('fk-nome',nm.length<3),bad('fk-val',!expOk(v)),bad('fk-cvv',!/^\d{3,4}$/.test(c))];if(r.some(Boolean))return;
+  card={brand:brandOf(n),last4:n.slice(-4),nome:nm.toUpperCase(),exp:v};go('home');toast('Cartão salvo: final '+card.last4+'.')};
+$('btnCartaoVoltar').onclick=()=>go('home');
+$('btnSair').onclick=()=>{go('login');$('l-email').value=''};
+go('login');
+</script>
+</body>
+</html>
